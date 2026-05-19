@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sweet Seventeen of Aurora | Undangan Digital</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out infinite 3s',
+                        'twinkle': 'twinkle 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        twinkle: {
+                            '0%, 100%': { opacity: 0.2, transform: 'scale(0.8)' },
+                            '50%': { opacity: 1, transform: 'scale(1.2)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ec4899;
+            border-radius: 9999px;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(236, 72, 153, 0.1);
+        }
+
+        /* Ambient Glow Effects */
+        .glow-pink {
+            filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.6));
+        }
+        .glow-purple {
+            filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.5));
+        }
+
+        /* Star Background Grid */
+        .stars {
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+        }
+
+        /* Envelope transition */
+        .envelope-open {
+            transform: translateY(-100vh);
+            transition: all 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+    </style>
+</head>
+<body class="bg-[#0b0f19] text-white font-sans overflow-hidden antialiased">
+
+    <!-- COVER / ENVELOPE GATEWAY -->
+    <div id="envelopeCover" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-[#0b0f19] via-[#1e112a] to-[#0b0f19] px-4 text-center transition-all duration-1000">
+        <!-- Background Stars on Cover -->
+        <div class="absolute inset-0 stars opacity-40 pointer-events-none"></div>
+        
+        <!-- Glowing Ambient Lights -->
+        <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-pink-600/20 rounded-full blur-[100px] pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-82 h-82 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none animate-pulse-slow"></div>
+
+        <!-- Envelope Visual Container -->
+        <div class="relative w-full max-w-lg p-8 mx-auto glass-card rounded-3xl border border-white/10 flex flex-col items-center z-10 animate-float">
+            <!-- Neon 17 Tag -->
+            <div class="relative mb-6">
+                <span class="text-xs uppercase tracking-[0.4em] text-pink-400 font-semibold block mb-2">You Are Invited To</span>
+                <div class="relative inline-block px-8 py-3 rounded-full border border-pink-500/30 bg-pink-500/5 glow-pink">
+                    <span class="font-serif text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent italic">Sweet 17</span>
+                </div>
+            </div>
+
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide mb-2 font-sans">AURORA PRINCESSA</h1>
+            <p class="text-sm text-gray-400 max-w-xs mb-8">Merayakan babak baru yang penuh warna & gemerlap bersama kami.</p>
+
+            <!-- Recipient Information Box -->
+            <div class="w-full bg-slate-900/50 rounded-2xl p-4 border border-white/5 mb-8">
+                <span class="text-xs text-purple-400 tracking-wider block mb-1">Kepada Yth. Bapak/Ibu/Saudara/i:</span>
+                <span id="guestName" class="text-xl font-bold text-white tracking-wide">- Nama Tamu Undangan -</span>
+            </div>
+
+            <!-- Unlock Button -->
+            <button id="btnOpen" onclick="openInvitation()" class="group relative px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 rounded-full text-white font-bold tracking-widest shadow-[0_0_30px_rgba(236,72,153,0.4)] hover:shadow-[0_0_45px_rgba(236,72,153,0.7)] transform hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                <span class="absolute inset-0 w-full h-full rounded-full bg-white/20 blur-sm scale-0 group-hover:scale-100 transition-transform duration-300"></span>
+                <i data-lucide="mail-open" class="w-5 h-5 animate-bounce"></i>
+                BUKA UNDANGAN
+            </button>
+        </div>
+    </div>
+
+
+    <!-- BACKGROUND MUSIC & AUDIO CONTROLLER -->
+    <audio id="bgMusic" loop>
+        <!-- Royalty-free premium pop synth track suitable for Sweet 17 theme -->
+        <source src="https://assets.mixkit.co/music/preview/mixkit-bright-future-91.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="musicControl" class="fixed bottom-6 right-6 z-40 hidden">
+        <button onclick="toggleMusic()" class="w-12 h-12 rounded-full glass-card hover:bg-white/10 border border-white/20 flex items-center justify-center text-pink-400 shadow-lg transform hover:scale-110 transition-all duration-300">
+            <span class="absolute inset-0 rounded-full animate-ping bg-pink-500/20 opacity-75"></span>
+            <i id="musicIcon" data-lucide="music" class="w-5 h-5"></i>
+        </button>
+    </div>
+
+
+    <!-- MAIN INVITATION SITE (HIDDEN UNTIL UNLOCKED) -->
+    <div id="mainSite" class="h-screen overflow-y-auto stars relative opacity-0 transition-opacity duration-1000">
+        
+        <!-- Glowing Orbs inside the main website layout -->
+        <div class="absolute top-10 left-10 w-96 h-96 bg-purple-700/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute top-[120vh] right-10 w-96 h-96 bg-pink-700/10 rounded-full blur-[140px] pointer-events-none"></div>
+        <div class="absolute bottom-20 left-1/3 w-[500px] h-[500px] bg-indigo-700/10 rounded-full blur-[160px] pointer-events-none"></div>
+
+        <!-- HERO SECTION -->
+        <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative z-10 pt-16">
+            <!-- Sparkle Icon Floating -->
+            <div class="animate-float mb-4">
+                <i data-lucide="sparkles" class="w-12 h-12 text-pink-400 glow-pink"></i>
+            </div>
+            
+            <p class="text-xs md:text-sm tracking-[0.6em] text-purple-400 uppercase font-bold mb-4">You Are Invited To Celebrate</p>
+            
+            <h1 class="text-5xl md:text-8xl font-black tracking-wide font-sans text-white mb-2 leading-none">
+                AURORA'S<br>
+                <span class="font-serif italic bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">Sweet Seventeen</span>
+            </h1>
+
+            <p class="text-md md:text-xl text-gray-300 font-light tracking-widest max-w-2xl mt-4 mb-12">
+                "Life is a movie, and seventeen is the most beautiful scene."
+            </p>
+
+            <!-- COUNTDOWN TIMER CONTAINER -->
+            <div class="w-full max-w-xl mx-auto glass-card rounded-2xl p-6 md:p-8 mb-12 transform hover:scale-[1.02] transition-all duration-500">
+                <p class="text-xs uppercase tracking-widest text-pink-400 mb-6 font-semibold">Counting Down To The Magic Hour</p>
+                <div class="grid grid-cols-4 gap-4 text-center">
+                    <div class="bg-white/5 rounded-xl py-3 border border-white/5">
+                        <span id="days" class="text-2xl md:text-4xl font-extrabold text-white block">00</span>
+                        <span class="text-[10px] md:text-xs text-gray-400 tracking-wider uppercase">Hari</span>
+                    </div>
+                    <div class="bg-white/5 rounded-xl py-3 border border-white/5">
+                        <span id="hours" class="text-2xl md:text-4xl font-extrabold text-white block">00</span>
+                        <span class="text-[10px] md:text-xs text-gray-400 tracking-wider uppercase">Jam</span>
+                    </div>
+                    <div class="bg-white/5 rounded-xl py-3 border border-white/5">
+                        <span id="minutes" class="text-2xl md:text-4xl font-extrabold text-white block">00</span>
+                        <span class="text-[10px] md:text-xs text-gray-400 tracking-wider uppercase">Menit</span>
+                    </div>
+                    <div class="bg-white/5 rounded-xl py-3 border border-white/5">
+                        <span id="seconds" class="text-2xl md:text-4xl font-extrabold text-white block">00</span>
+                        <span class="text-[10px] md:text-xs text-gray-400 tracking-wider uppercase">Detik</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="animate-bounce mt-4 cursor-pointer" onclick="scrollToSection('theCelebrant')">
+                <i data-lucide="chevron-down" class="w-8 h-8 text-pink-500"></i>
+            </div>
+        </section>
+
+
+        <!-- THE CELEBRANT SECTION -->
+        <section id="theCelebrant" class="py-24 px-4 flex flex-col items-center justify-center relative z-10 max-w-5xl mx-auto">
+            <h2 class="text-xs tracking-[0.5em] text-pink-400 font-bold uppercase mb-2">The Golden Age</h2>
+            <h3 class="text-3xl md:text-5xl font-extrabold font-sans text-center mb-16">Meet Our Princess</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
+                <!-- Celebrant Photo Container with Holographic Border effects -->
+                <div class="relative group mx-auto">
+                    <div class="absolute -inset-1.5 bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative bg-slate-950 rounded-2xl overflow-hidden aspect-[4/5] w-[300px] md:w-[350px]">
+                        <!-- Ideal size is 600x750 or portrait ratio. Fallback placeholder visual is set -->
+                        <img src="https://placehold.co/600x750/1e1b4b/fda4af?text=Aurora+17th+Photo" alt="Aurora Princessa" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='https://placehold.co/600x750/1e1b4b/fda4af?text=Aurora+Princessa'">
+                        
+                        <!-- Overlay glass info -->
+                        <div class="absolute bottom-0 inset-x-0 glass-panel p-4 text-center border-t border-white/10">
+                            <span class="font-serif italic text-xl text-pink-300">"Glowing with 17 years of beauty"</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Biography & Devotion -->
+                <div class="text-center md:text-left space-y-6">
+                    <h4 class="text-3xl font-extrabold tracking-wide font-sans">AURORA PRINCESSA ADELIA</h4>
+                    <p class="text-pink-400 font-semibold tracking-widest text-sm uppercase">Putri Pertama dari Bapak Wijaya & Ibu Riana</p>
+                    <p class="text-gray-300 leading-relaxed font-light">
+                        "Tujuh belas tahun yang lalu, sebuah anugerah yang indah lahir di dunia ini. Kini saatnya melangkah menuju gerbang baru kedewasaan, impian, dan kebebasan yang bertanggung jawab. Mari berpesta menemani lembaran baru dalam hidupku!"
+                    </p>
+                    
+                    <!-- Dynamic Interactive Video Play Button -->
+                    <div class="pt-4 flex justify-center md:justify-start">
+                        <button onclick="openVideoModal()" class="group px-6 py-3 bg-white/5 hover:bg-white/10 border border-pink-500/30 rounded-full text-white font-semibold transition-all duration-300 flex items-center gap-3 hover:shadow-[0_0_20px_rgba(236,72,153,0.3)]">
+                            <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center text-white group-hover:scale-110 transition-transform duration-300 shadow-md">
+                                <i data-lucide="play" class="w-4 h-4 fill-white ml-0.5"></i>
+                            </div>
+                            TONTON VIDEO UNDANGAN
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- THE EVENT DETAILS -->
+        <section class="py-24 px-4 relative z-10 max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-xs tracking-[0.5em] text-purple-400 font-bold uppercase mb-2">Save The Date</h2>
+                <h3 class="text-3xl md:text-5xl font-extrabold font-sans">Party Schedule</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                <!-- Card 1: Main Celebration -->
+                <div class="glass-card rounded-3xl p-8 relative overflow-hidden group hover:border-pink-500/30 transition-all duration-500">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-pink-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center text-white mb-6">
+                        <i data-lucide="crown" class="w-6 h-6"></i>
+                    </div>
+
+                    <h4 class="text-2xl font-bold mb-4 font-sans text-white">THE MAIN CELEBRATION</h4>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="calendar" class="w-5 h-5 text-pink-400 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-white">Sabtu, 20 Juni 2026</p>
+                                <p class="text-sm text-gray-400">Pukul 19.00 - Selesai</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-pink-400 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-white">Skyline Grand Ballroom</p>
+                                <p class="text-sm text-gray-400">Lantai 17, Hotel Grand Aster, Bandung</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="shirt" class="w-5 h-5 text-pink-400 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-white">Dress Code: Glamour Neon / Sparkle Dark</p>
+                                <p class="text-sm text-gray-400">Harap mengenakan pakaian bernuansa gelap dengan sentuhan warna neon atau kilau payet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: After Party -->
+                <div class="glass-card rounded-3xl p-8 relative overflow-hidden group hover:border-indigo-500/30 transition-all duration-500">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white mb-6">
+                        <i data-lucide="music-4" class="w-6 h-6 animate-pulse"></i>
+                    </div>
+
+                    <h4 class="text-2xl font-bold mb-4 font-sans text-white">GLOW-IN-DARK AFTER PARTY</h4>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="clock" class="w-5 h-5 text-indigo-400 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-white">Sabtu, 20 Juni 2026</p>
+                                <p class="text-sm text-gray-400">Pukul 21.30 - Selesai</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="disc" class="w-5 h-5 text-indigo-400 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-white">DJ Performance & Laser Show</p>
+                                <p class="text-sm text-gray-400">Sesi penutup istimewa dengan penampilan DJ kustom dan pesta kilau glow stick!</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="sparkles" class="w-5 h-5 text-indigo-400 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-white">Aksesoris Neon Gratis</p>
+                                <p class="text-sm text-gray-400">Glow stick & face-painting neon akan disediakan di loket resepsionis.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GOOGLE MAPS CARD WITH EMBED -->
+            <div class="mt-12 glass-card rounded-3xl p-6 overflow-hidden">
+                <p class="text-sm font-semibold tracking-wider text-pink-400 mb-4 flex items-center gap-2">
+                    <i data-lucide="navigation" class="w-4 h-4"></i>
+                    PETA LOKASI PERAYAAN
+                </p>
+                <div class="rounded-2xl overflow-hidden aspect-[16/9] w-full border border-white/5">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15843.411680671408!2d107.6105!3d-6.9147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e639825b477f%3A0x123456789abcdef!2sBandung!5e0!3m2!1sid!2sid!4v1700000000000" 
+                        class="w-full h-full border-none opacity-80 hover:opacity-100 transition-opacity duration-300" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                <div class="flex justify-center mt-6">
+                    <a href="https://maps.google.com" target="_blank" class="px-6 py-3 bg-indigo-600/20 hover:bg-indigo-600/40 border border-indigo-500/30 rounded-full font-semibold flex items-center gap-2 transition-all duration-300 transform hover:scale-105">
+                        <i data-lucide="map" class="w-4 h-4"></i>
+                        Buka Google Maps
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- RSVP & BOOK OF WISHES -->
+        <section class="py-24 px-4 relative z-10 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- COLUMN 1: RSVP FORM -->
+                <div class="glass-card rounded-3xl p-8 relative">
+                    <div class="absolute top-0 left-0 w-24 h-24 bg-pink-500/5 rounded-full blur-xl pointer-events-none"></div>
+                    <h3 class="text-2xl font-bold font-sans mb-2 text-white">KONFIRMASI KEHADIRAN</h3>
+                    <p class="text-sm text-gray-400 mb-6">Tolong beritahu kami apakah kamu bisa hadir sebelum tanggal 15 Juni 2026.</p>
+
+                    <!-- Real RSVP Form configured directly to WhatsApp -->
+                    <form id="rsvpForm" onsubmit="sendRSVP(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-pink-400 font-semibold mb-2">Nama Anda</label>
+                            <input type="text" id="rsvpName" required class="w-full px-4 py-3 bg-slate-900/60 border border-white/10 rounded-xl focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition text-white">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-pink-400 font-semibold mb-2">Status Kehadiran</label>
+                            <select id="rsvpStatus" class="w-full px-4 py-3 bg-slate-900/60 border border-white/10 rounded-xl focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition text-white">
+                                <option value="Hadir, Siap Pesta!">Ya, Saya Akan Hadir</option>
+                                <option value="Maaf, Belum Bisa Hadir">Maaf, Tidak Bisa Hadir</option>
+                                <option value="Masih Ragu-ragu">Masih Ragu-Ragu</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-pink-400 font-semibold mb-2">Jumlah Tamu</label>
+                            <select id="rsvpGuestCount" class="w-full px-4 py-3 bg-slate-900/60 border border-white/10 rounded-xl focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition text-white">
+                                <option value="1 Orang">1 Orang</option>
+                                <option value="2 Orang">2 Orang</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase tracking-wider text-pink-400 font-semibold mb-2">Pesan Tambahan (Opsional)</label>
+                            <textarea id="rsvpMessage" rows="3" class="w-full px-4 py-3 bg-slate-900/60 border border-white/10 rounded-xl focus:border-pink-500 focus:ring-1 focus:ring-pink-500 outline-none transition text-white placeholder-gray-600" placeholder="Contoh: Happy Birthday Aurora!"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-xl text-white font-bold tracking-widest shadow-lg hover:shadow-pink-500/20 transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            KIRIM RSVP VIA WA
+                        </button>
+                    </form>
+                </div>
+
+                <!-- COLUMN 2: REALTIME WISHES WALL -->
+                <div class="glass-card rounded-3xl p-8 flex flex-col h-full">
+                    <h3 class="text-2xl font-bold font-sans mb-1 text-white">BUKU TAMU & UCAPAN</h3>
+                    <p class="text-sm text-gray-400 mb-6">Tinggalkan kenangan, doa manis, dan ucapan selamat untuk Aurora.</p>
+
+                    <!-- Add Wishes Form -->
+                    <form id="wishesForm" onsubmit="addWish(event)" class="space-y-4 mb-6">
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" id="wishSender" required placeholder="Nama Anda" class="w-full px-3 py-2 bg-slate-900/60 border border-white/10 rounded-xl focus:border-pink-500 outline-none transition text-white text-sm">
+                            <input type="text" id="wishRelation" placeholder="Hubungan (Contoh: Teman SMP)" class="w-full px-3 py-2 bg-slate-900/60 border border-white/10 rounded-xl focus:border-pink-500 outline-none transition text-white text-sm">
+                        </div>
+                        <div class="relative">
+                            <textarea id="wishContent" required rows="2" placeholder="Tuliskan ucapan termanismu disini..." class="w-full px-3 py-2 bg-slate-900/60 border border-white/10 rounded-xl focus:border-pink-500 outline-none transition text-white text-sm pr-12"></textarea>
+                            <button type="submit" class="absolute right-2 bottom-3 p-2 bg-pink-500 hover:bg-pink-600 rounded-lg text-white transition">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Wishes Container Box -->
+                    <div id="wishesContainer" class="flex-1 overflow-y-auto max-h-[250px] space-y-4 pr-2">
+                        <!-- Dynamic content loaded via JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- FOOTER SECTION -->
+        <footer class="py-16 text-center border-t border-white/5 relative z-10">
+            <div class="flex flex-col items-center gap-4">
+                <span class="font-serif italic text-3xl text-pink-400">Aurora Princessa</span>
+                <p class="text-xs text-gray-500 tracking-widest uppercase">© 2026 Aurora Digital Invitation. All Rights Reserved.</p>
+                
+                <!-- GitHub Attribution (Excellent for hosting users) -->
+                <div class="mt-4 flex items-center gap-1.5 text-xs text-gray-400 bg-slate-900/60 px-4 py-2 rounded-full border border-white/5">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    <span>Hosted on</span>
+                    <a href="https://pages.github.com" target="_blank" class="text-pink-400 hover:underline font-semibold">GitHub Pages</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <!-- HIGH TECH VIDEO PLAYER MODAL -->
+    <div id="videoModal" class="fixed inset-0 bg-slate-950/90 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-500">
+        <!-- Close button background area -->
+        <div class="absolute inset-0 cursor-pointer" onclick="closeVideoModal()"></div>
+        
+        <div class="relative w-full max-w-3xl glass-card rounded-3xl overflow-hidden border border-white/20 shadow-2xl z-10 transform scale-95 transition-transform duration-500" id="videoModalCard">
+            
+            <!-- Video Title Bar -->
+            <div class="p-4 bg-slate-900/80 border-b border-white/10 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-pink-500 animate-pulse"></span>
+                    <span class="text-sm font-bold uppercase tracking-wider text-pink-400">Aurora's Teaser Invitation</span>
+                </div>
+                <button onclick="closeVideoModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Responsive Video Player Embed container -->
+            <!-- TAMU GITHUB PAGES BISA MENGGANTI LINK YOUTUBE INI SESUAI KEINGINAN -->
+            <div class="aspect-video bg-black flex items-center justify-center relative">
+                <iframe 
+                    id="teaserVideo" 
+                    class="w-full h-full" 
+                    src="" 
+                    title="Sweet 17 Teaser" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="p-4 bg-slate-900/80 text-center border-t border-white/10">
+                <p class="text-xs text-gray-400">💡 Tip: Gantilah link YouTube di atas di bagian file <code>index.html</code> untuk memakai videomu sendiri.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- INTERACTIVE JAVASCRIPT CONTROLLERS -->
+    <script>
+        // Set dynamic recipient name from URL Query String (?to=Nama+Tamu)
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('to');
+        if (guestName) {
+            document.getElementById('guestName').textContent = decodeURIComponent(guestName.replace(/\+/g, ' '));
+        }
+
+        // Initialize Lucide Icons immediately
+        lucide.createIcons();
+
+        // ------------------ AUDIO MUSIC HANDLER ------------------
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        let isMusicPlaying = false;
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicIcon.setAttribute('data-lucide', 'music-4');
+                isMusicPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicIcon.setAttribute('data-lucide', 'music');
+                    isMusicPlaying = true;
+                }).catch(err => {
+                    console.log("Autoplay music blocked by browser, needs user interaction.");
+                });
+            }
+            lucide.createIcons();
+        }
+
+        // ------------------ UNLOCK INVITATION COVER ------------------
+        function openInvitation() {
+            // Unfold/move the envelope cover up
+            const cover = document.getElementById('envelopeCover');
+            cover.classList.add('envelope-open');
+            
+            // Show main site & music controls with delay
+            const mainSite = document.getElementById('mainSite');
+            const musicCtrl = document.getElementById('musicControl');
+            
+            document.body.classList.remove('overflow-hidden');
+            mainSite.classList.remove('opacity-0');
+            mainSite.classList.add('opacity-100');
+            musicCtrl.classList.remove('hidden');
+
+            // Play music automatically
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+            }).catch(e => console.log("Music waiting for gesture."));
+
+            // Fireworks/Confetti Blast Effect
+            launchConfettiBlast();
+        }
+
+        // Confetti Fireworks logic
+        function launchConfettiBlast() {
+            const duration = 3 * 1000;
+            const end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0, y: 0.8 },
+                    colors: ['#ec4899', '#a855f7', '#6366f1']
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1, y: 0.8 },
+                    colors: ['#ec4899', '#a855f7', '#6366f1']
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        }
+
+        // ------------------ COUNTDOWN TIMER ------------------
+        // Target Date (20 June 2026 19:00:00)
+        const targetDate = new Date("Jun 20, 2026 19:00:00").getTime();
+
+        const timerInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference < 0) {
+                clearInterval(timerInterval);
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }, 1000);
+
+
+        // ------------------ VIDEO MODAL CONTROL ------------------
+        // Ganti URL Youtube di bawah ini untuk video kustom Anda!
+        const youtubeVideoID = "dQw4w9WgXcQ"; // Default placeholder video (atau isi ID video buatanmu sendiri)
+        const videoModal = document.getElementById('videoModal');
+        const videoModalCard = document.getElementById('videoModalCard');
+        const teaserVideo = document.getElementById('teaserVideo');
+
+        function openVideoModal() {
+            // Set source with autoplay parameter
+            teaserVideo.src = `https://www.youtube.com/embed/${youtubeVideoID}?autoplay=1&rel=0`;
+            
+            // Show modal
+            videoModal.classList.remove('pointer-events-none');
+            videoModal.classList.add('opacity-100');
+            videoModalCard.classList.remove('scale-95');
+            videoModalCard.classList.add('scale-100');
+
+            // Pause background music temporarily while playing video
+            if (isMusicPlaying) {
+                bgMusic.pause();
+            }
+        }
+
+        function closeVideoModal() {
+            // Reset source to stop playing sound
+            teaserVideo.src = "";
+            
+            // Hide modal
+            videoModal.classList.add('pointer-events-none');
+            videoModal.classList.remove('opacity-100');
+            videoModalCard.classList.add('scale-95');
+            videoModalCard.classList.remove('scale-100');
+
+            // Resume background music if it was playing before
+            if (isMusicPlaying) {
+                bgMusic.play().catch(e => console.log(e));
+            }
+        }
+
+
+        // ------------------ RSVP WHATSAPP FORM ------------------
+        // Silakan sesuaikan nomor WA di bawah ini (Gunakan kode negara, contoh: 62812xxxxxx)
+        const targetWhatsAppNumber = "628123456789"; 
+
+        function sendRSVP(event) {
+            event.preventDefault();
+            const name = document.getElementById('rsvpName').value;
+            const status = document.getElementById('rsvpStatus').value;
+            const guests = document.getElementById('rsvpGuestCount').value;
+            const msg = document.getElementById('rsvpMessage').value || "-";
+
+            const waText = `Halo Aurora! 🎉\n\nSaya ingin mengonfirmasi kehadiran di pesta ulang tahunmu:\n\n*Nama:* ${name}\n*Kehadiran:* ${status}\n*Jumlah Tamu:* ${guests}\n*Pesan:* ${msg}\n\nTerima kasih! Sampai jumpa di pesta nanti! ✨`;
+            const waUrl = `https://wa.me/${targetWhatsAppNumber}?text=${encodeURIComponent(waText)}`;
+            
+            // Open WhatsApp link in a new window
+            window.open(waUrl, '_blank');
+        }
+
+
+        // ------------------ DYNAMIC WISHES WALL (LOCALSTORAGE) ------------------
+        // Mock data wishes defaults
+        const defaultWishes = [
+            { sender: "Jessica Clarissa", relation: "Teman Dekat", content: "Happy Sweet 17 Aurora! Semoga selalu ceria, makin pintar, dan semua impianmu tercapai yaa! Can't wait for the glow after party! 💖🎉" },
+            { sender: "Daffa Ramadhan", relation: "Sahabat", content: "Selamat ulang tahun yang ke-17! Selamat memasuki fase baru pendewasaan. Pesta ini pasti bakal keren banget! See you there!" },
+            { sender: "Tante Maya", relation: "Keluarga", content: "Selamat ya Aurora sayang, tumbuh jadi anak yang berbakti dan sukses selalu. Peluk hangat dari jauh." }
+        ];
+
+        // Load wishes from LocalStorage or fallback to default
+        let wishes = JSON.parse(localStorage.getItem('aurora_wishes')) || defaultWishes;
+
+        function renderWishes() {
+            const container = document.getElementById('wishesContainer');
+            container.innerHTML = '';
+
+            wishes.forEach(item => {
+                const wishCard = document.createElement('div');
+                wishCard.className = 'p-3 rounded-2xl bg-white/5 border border-white/5 space-y-1 transition duration-300 hover:bg-white/10';
+                wishCard.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-extrabold text-pink-400">${escapeHTML(item.sender)}</span>
+                        <span class="text-[9px] text-gray-500 bg-white/5 px-2 py-0.5 rounded-full">${escapeHTML(item.relation || 'Tamu')}</span>
+                    </div>
+                    <p class="text-xs text-gray-300 font-light leading-relaxed">${escapeHTML(item.content)}</p>
+                `;
+                container.appendChild(wishCard);
+            });
+        }
+
+        function addWish(event) {
+            event.preventDefault();
+            const sender = document.getElementById('wishSender').value;
+            const relation = document.getElementById('wishRelation').value;
+            const content = document.getElementById('wishContent').value;
+
+            // Push to local storage
+            wishes.unshift({ sender, relation, content });
+            localStorage.setItem('aurora_wishes', JSON.stringify(wishes));
+
+            // Reset Form fields
+            document.getElementById('wishSender').value = '';
+            document.getElementById('wishRelation').value = '';
+            document.getElementById('wishContent').value = '';
+
+            // Re-render and fire dynamic single confetti splash
+            renderWishes();
+            confetti({
+                particleCount: 40,
+                spread: 60,
+                origin: { y: 0.8 },
+                colors: ['#ec4899', '#a855f7']
+            });
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        // Helper smooth scroll
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Render initially on window load
+        window.onload = function() {
+            renderWishes();
+        };
+    </script>
+</body>
+</html>
